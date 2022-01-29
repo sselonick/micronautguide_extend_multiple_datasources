@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public interface GenreRepository extends GenericRepository<Genre, Long> {
+public interface GenreRepository {
 
     @TransactionalAdvice("first")
     Optional<Genre> findById(@NotNull Long id);

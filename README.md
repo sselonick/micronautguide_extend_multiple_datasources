@@ -11,8 +11,80 @@
 - [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
 
 
-## Error in unit tests when trying to extend micronaut hibernate-jpa tutorial to multiple data sources [example](https://guides.micronaut.io/latest/micronaut-jpa-hibernate-gradle-java.html)
+# Error Summary
+I have been trying to extend the micronaut-jpa-hibernate
+[tutorial](https://guides.micronaut.io/latest/micronaut-jpa-hibernate-gradle-java.html) to multiple data sources.  I 
+have been unable to successfully implements a second datasource/repository. The following error is received when running 
+the GenreController unit test.  Any insight on the issue would be much appreciated.  Thanks!
 
+```bash
+ERROR i.m.http.server.RouteExecutor - Unexpected error occurred: Failed to inject value for field [entityManager] of 
+class: example.micronaut.GenreRepositoryImpl$Intercepted Message: Multiple possible bean candidates found: 
+[io.micronaut.configuration.hibernate.jpa.TransactionalSession$Intercepted, io.micronaut.configuration.hibernate.jpa.
+TransactionalSession$Intercepted]
+```
+
+
+The second repository I tried to add (`OtherRepositoryImpl`) is implemented in 
+java/example/micronaut/OtherBookRepositoryImpl.java. The repository is used in the `GenreController` POST endpoint.  
+
+```bash 
+@Singleton
+@Repository(value = "other")
+abstract class OtherBookRepositoryImpl implements GenericRepository<OtherBook, Long> {
+
+    @Inject
+    @PersistenceContext(name = "other")
+    private EntityManager entityManager;
+    private final ApplicationConfiguration applicationConfiguration;
+
+    public OtherBookRepositoryImpl(ApplicationConfiguration applicationConfiguration) {
+        this.applicationConfiguration = applicationConfiguration;
+    }
+
+....
+
+}
+```
+
+```bash
+@Post
+    public HttpResponse<Genre> save(@Body @Valid GenreSaveCommand cmd) {
+        Genre genre = genreRepository.save(cmd.getName());
+
+        OtherBook otherBook = otherBookRepository.save("Hello");
+        System.out.println("JUST SAVED: " + otherBook.getName());
+
+        return HttpResponse
+                .created(genre)
+                .headers(headers -> headers.location(location(genre.getId())));
+```
+
+
+I modified the initial repository GenreRepository to be an abstract class that implementing GenericRepository<Genre, Long>
+
+```bash
+
+@Singleton
+@Repository(value = "first")
+abstract class GenreRepositoryImpl implements GenericRepository<Genre, Long> {
+    @Inject
+    @PersistenceContext(name = "first")
+    private EntityManager entityManager;
+    private final ApplicationConfiguration applicationConfiguration;
+
+
+    private final static List<String> VALID_PROPERTY_NAMES = Arrays.asList("id", "name");
+
+    public GenreRepositoryImpl(ApplicationConfiguration applicationConfiguration) {
+        this.applicationConfiguration = applicationConfiguration;
+    }
+
+
+  ....
+}
+````
+### Error received when running the GenreController unit test
 
 ````bash
 ERROR i.m.http.server.RouteExecutor - Unexpected error occurred: Failed to inject value for field [entityManager] of class: example.micronaut.GenreRepositoryImpl$Intercepted
