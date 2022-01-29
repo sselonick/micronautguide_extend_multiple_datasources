@@ -27,11 +27,6 @@ public class GenreControllerTest {
     @Client("/")
     HttpClient client;
 
-    //@Inject
-    //EntityManager entityManager;
-
-    //@Inject
-    //GenreRepositoryImpl model;
 
     @Test
     public void supplyAnInvalidOrderTriggersValidationFailure() {
@@ -51,32 +46,6 @@ public class GenreControllerTest {
 
         assertNotNull(thrown.getResponse());
         assertEquals(HttpStatus.NOT_FOUND, thrown.getStatus());
-    }
-
-    @Test
-    public void testInsertBeforeTest() {
-
-
-
-
-        //model.save("test-genre-1");
-
-        HttpRequest request;
-        HttpResponse response;
-
-
-        //request = HttpRequest.POST("/genres", new GenreSaveCommand("Microservices"));
-        //response = client.toBlocking().exchange(request);
-
-
-        request = HttpRequest.GET("/genres/list");
-        List<Genre> genres = client.toBlocking().retrieve(request, Argument.of(List.class, Genre.class));
-
-        System.out.println("fin");
-
-
-
-
     }
 
     @Test

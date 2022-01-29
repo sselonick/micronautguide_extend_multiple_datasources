@@ -24,17 +24,9 @@ abstract class OtherBookRepositoryImpl implements GenericRepository<OtherBook, L
     private EntityManager entityManager;
     private final ApplicationConfiguration applicationConfiguration;
 
-
-    //public OtherBookRepositoryImpl(EntityManager entityManager,
-    //                               ApplicationConfiguration applicationConfiguration) {
-    //    this.entityManager = entityManager;
-    //    this.applicationConfiguration = applicationConfiguration;
-    //}
     public OtherBookRepositoryImpl(ApplicationConfiguration applicationConfiguration) {
         this.applicationConfiguration = applicationConfiguration;
     }
-
-
 
 
 

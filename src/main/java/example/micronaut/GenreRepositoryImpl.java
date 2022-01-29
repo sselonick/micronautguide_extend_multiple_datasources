@@ -42,7 +42,6 @@ abstract class GenreRepositoryImpl implements GenericRepository<Genre, Long> {
 
 
     @ReadOnly
-    @Transactional
     @TransactionalAdvice("first")
     public Optional<Genre> findById(@NotNull Long id) {
         return Optional.ofNullable(entityManager.find(Genre.class, id));
@@ -65,7 +64,6 @@ abstract class GenreRepositoryImpl implements GenericRepository<Genre, Long> {
     }
 
     @ReadOnly
-    @Transactional
     @TransactionalAdvice("first")
     public List<Genre> findAll(@NotNull SortingAndOrderArguments args) {
         String qlString = "SELECT g FROM Genre as g";
