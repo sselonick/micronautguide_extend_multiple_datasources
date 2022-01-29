@@ -1,16 +1,3 @@
-## Micronaut 3.1.3 Documentation
-
-- [User Guide](https://docs.micronaut.io/3.1.3/guide/index.html)
-- [API Reference](https://docs.micronaut.io/3.1.3/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/3.1.3/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
-
-## Feature http-client documentation
-
-- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
-
-
 # Error Summary
 I have been trying to extend the micronaut-jpa-hibernate
 [tutorial](https://guides.micronaut.io/latest/micronaut-jpa-hibernate-gradle-java.html) to multiple data sources.  I 
@@ -146,3 +133,17 @@ Caused by: io.micronaut.context.exceptions.NonUniqueBeanException: Multiple poss
 
 
 ```
+
+
+
+## Micronaut 3.1.3 Documentation
+
+- [User Guide](https://docs.micronaut.io/3.1.3/guide/index.html)
+- [API Reference](https://docs.micronaut.io/3.1.3/api/index.html)
+- [Configuration Reference](https://docs.micronaut.io/3.1.3/guide/configurationreference.html)
+- [Micronaut Guides](https://guides.micronaut.io/index.html)
+---
+
+## Feature http-client documentation
+
+- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
