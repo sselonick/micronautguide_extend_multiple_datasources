@@ -11,6 +11,50 @@ class: example.micronaut.GenreRepositoryImpl$Intercepted Message: Multiple possi
 TransactionalSession$Intercepted]
 ```
 
+### application.yml
+```bash
+micronaut:
+  application:
+    name: micronautguide
+
+application:
+  max: 50
+
+datasources:
+  first:
+    url: ${JDBC_URL:`jdbc:h2:mem:first;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE`}
+    username: ${JDBC_USER:sa}
+    password: ${JDBC_PASSWORD:""}
+    driverClassName: ${JDBC_DRIVER:org.h2.Driver}
+
+  other:
+    url: ${JDBC_URL:`jdbc:h2:mem:other;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE`}
+    username: ${JDBC_USER:sa}
+    password: ${JDBC_PASSWORD:""}
+    driverClassName: ${JDBC_DRIVER:org.h2.Driver}
+
+jpa:
+  first:
+    name: 'first'
+    entity-scan:
+      packages: 'example.micronaut.domain'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+  other:
+    name: 'other'
+    entity-scan:
+      packages: 'example.micronaut.other'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
+
+```
+
 
 The second repository I tried to add (`OtherRepositoryImpl`) is implemented in 
 java/example/micronaut/OtherBookRepositoryImpl.java. The repository is used in the `GenreController` POST endpoint.  
