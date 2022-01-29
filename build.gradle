@@ -1,0 +1,76 @@
+plugins {
+    id("com.github.johnrengelman.shadow") version "7.1.0"
+    id("io.micronaut.application") version "2.0.8"
+}
+
+version = "0.1"
+group = "example.micronaut"
+
+repositories {
+    mavenCentral()
+}
+
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("example.micronaut.*")
+    }
+}
+
+dependencies {
+    // tutorial
+    annotationProcessor("io.micronaut:micronaut-http-validation")
+
+    // tutorial
+    implementation("io.micronaut:micronaut-http-client")
+
+    // tutorial
+    implementation("io.micronaut:micronaut-runtime")
+
+    // not found in zip
+    //implementation("javax.annotation:javax.annotation-api")
+    runtimeOnly("ch.qos.logback:logback-classic")
+
+    // found in zip
+    implementation("io.micronaut:micronaut-validation")
+
+    // 3 packages from the tutorial
+    implementation("io.micronaut.sql:micronaut-hibernate-jpa")
+    implementation("io.micronaut.sql:micronaut-jdbc-hikari")
+    runtimeOnly("com.h2database:h2")
+
+    // only implementation found in zip - tutorial
+    annotationProcessor("io.micronaut.data:micronaut-data-hibernate-jpa")
+
+
+
+    // found in zip
+    implementation("jakarta.annotation:jakarta.annotation-api")
+
+
+    //found in zip
+    annotationProcessor("io.micronaut.data:micronaut-data-processor")
+
+    // found
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
+
+    // https://micronaut-projects.github.io/micronaut-sql/1.2.3/guide/index.html
+    annotationProcessor("jakarta.persistence:jakarta.persistence-api")
+    compileOnly("org.graalvm.nativeimage:svm")
+
+
+}
+
+
+application {
+    mainClass.set("example.micronaut.Application")
+}
+java {
+    sourceCompatibility = JavaVersion.toVersion("11")
+    targetCompatibility = JavaVersion.toVersion("11")
+}
+
+
+
