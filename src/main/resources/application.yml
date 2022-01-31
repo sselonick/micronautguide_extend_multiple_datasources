@@ -7,12 +7,14 @@ application:
 
 datasources:
   first:
+    name: 'first'
     url: ${JDBC_URL:`jdbc:h2:mem:first;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE`}
     username: ${JDBC_USER:sa}
     password: ${JDBC_PASSWORD:""}
     driverClassName: ${JDBC_DRIVER:org.h2.Driver}
 
   other:
+    name: 'other'
     url: ${JDBC_URL:`jdbc:h2:mem:other;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE`}
     username: ${JDBC_USER:sa}
     password: ${JDBC_PASSWORD:""}
@@ -20,7 +22,6 @@ datasources:
 
 jpa:
   first:
-    name: 'first'
     entity-scan:
       packages: 'example.micronaut.domain'
     properties:
@@ -29,7 +30,6 @@ jpa:
           auto: update
         show_sql: true
   other:
-    name: 'other'
     entity-scan:
       packages: 'example.micronaut.other'
     properties:
